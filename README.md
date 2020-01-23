@@ -7,4 +7,4 @@ Install under *main
 # Known issues
 
 - Doesn't work in system applications that use shared framebuffer
-- Affects lock screen, making it dim
+- Affects lock screen and some system dialog messages, making it dim
