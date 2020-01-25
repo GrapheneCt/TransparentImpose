@@ -1,6 +1,6 @@
 # TransparentImpose
 
-Plugin for PS Vita that makes impose menu (the one that appears after long PS button press) transparent.
+Plugin for PS Vita that makes impose menu (the one that appears after long PS button press) and power off menu transparent.
 
 Install under *main
 
