@@ -4,7 +4,7 @@ Plugin for PS Vita that makes impose menu (the one that appears after long PS bu
 
 Install under *main
 
-# How to use custom transparency value
+# How to set custom transparency value
 
 Using Vitashell, create config file: `ur0:data/trimpose.txt`.
 Edit this file and enter your transparency value. Valid values are in 0-255 range:
