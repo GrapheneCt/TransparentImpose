@@ -16,3 +16,5 @@ Edit this file and enter your transparency value. Valid values are in 0-255 rang
 0 - 0% transparent
 
 Values below 30 is not recommended.
+
+Reboot is required to apply changes.
