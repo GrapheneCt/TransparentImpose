@@ -2,8 +2,12 @@
 #include <vitasdk.h>
 #include <psp2/kernel/modulemgr.h>
 #include <psp2/kernel/threadmgr.h>
+#include <psp2/io/fcntl.h> 
 #include <psp2/appmgr.h> 
 #include <psp2/types.h> 
+
+#define DEFAULT_TR 0xFF
+#define path "ur0:data/trimpose.txt"
 
 void _start() __attribute__((weak, alias("module_start")));
 
@@ -12,23 +16,37 @@ static __inline SceInt32 sceAppMgrGetAppState(SceAppMgrAppState *appState)
 	return _sceAppMgrGetAppState(appState, sizeof(SceAppMgrAppState), 0x00);
 }
 
-//TODO: Make a2 user-adjustable, fix lockscreen issue
+int sceAppMgrIsGameBudgetAppPresent(void);
 int sceAppMgrSetDisplayMergeConf(int a1, int a2);
 
 int uiWatcher(SceSize argc, void* argv) {
 
-	sceKernelDelayThread(1000000);
-	SceAppMgrAppState appState;
+	int trval = DEFAULT_TR;
 	int impose = SCE_FALSE;
+	SceUID fd = sceIoOpen(path, SCE_O_RDONLY, 0777);
+	if (fd >= 0) {
+		char buf[sizeof(int)];
+		sceIoRead(fd, buf, sizeof(int));
+		sceIoClose(fd);
+		trval = 0;
+		for (int i = 0; buf[i] != '\x0A'; i++)
+			trval = trval * 10 + buf[i] - '0';
+		if (trval > 0xFF)
+			trval = DEFAULT_TR;
+	}
+
+	SceAppMgrAppState appState;
 
 	while (1) {
-		sceAppMgrGetAppState(&appState);
-		if (impose != appState.isSystemUiOverlaid && appState.isSystemUiOverlaid == SCE_TRUE)
-			sceAppMgrSetDisplayMergeConf(0x100, 0x80);
-		else if (impose != appState.isSystemUiOverlaid)
-			sceAppMgrSetDisplayMergeConf(0x00, 0x100);
-		impose = appState.isSystemUiOverlaid;
-		sceKernelDelayThread(10000);
+		if (sceAppMgrIsGameBudgetAppPresent() == 1) {
+			sceAppMgrGetAppState(&appState);
+			if (impose != appState.isSystemUiOverlaid && appState.isSystemUiOverlaid == SCE_TRUE)
+				sceAppMgrSetDisplayMergeConf(0x100, trval);
+			else if (impose != appState.isSystemUiOverlaid)
+				sceAppMgrSetDisplayMergeConf(0x00, 0x100);
+			impose = appState.isSystemUiOverlaid;
+		}
+		sceKernelDelayThread(100000);
 	}
 
 	return 0;
