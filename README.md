@@ -4,7 +4,15 @@ Plugin for PS Vita that makes impose menu (the one that appears after long PS bu
 
 Install under *main
 
-# Known issues
+# How to use custom transparency value
 
-- Doesn't work in system applications that use shared framebuffer
-- Affects lock screen and some system dialog messages, making it dim
+Using Vitashell, create config file: `ur0:data/trimpose.txt`.
+Edit this file and enter your transparency value. Valid values are in 0-255 range:
+
+255 - 100% transparent
+.
+.
+.
+0 - 0% transparent
+
+Values below 30 is not recommended.
