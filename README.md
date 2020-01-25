@@ -1,8 +1,8 @@
 # TransparentImpose
 
-This plugin doesn't work in system applications (exceptions are Videos app and Package Installer).
-
 Plugin for PS Vita that makes impose menu (the one that appears after long PS button press) and power off menu transparent.
+
+This plugin doesn't work in system applications (exceptions are Videos app and Package Installer).
 
 Install under *main
 
