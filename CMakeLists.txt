@@ -34,6 +34,7 @@ target_link_libraries(TrImpose
   SceLibKernel_stub
   SceKernelThreadMgr_stub
   SceAppMgr_stub 
+  SceIofilemgr_stub
 )
 
 set_target_properties(TrImpose
