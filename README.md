@@ -11,11 +11,11 @@ Install under *main
 Using Vitashell, create config file: `ur0:data/trimpose.txt`.
 Edit this file and enter your transparency value. Valid values are in 0-255 range:
 
-255 - 100% transparent
+255 - 0% transparent
 .
 .
 .
-0 - 0% transparent
+0 - 100% transparent
 
 Values below 30 are not recommended.
 
