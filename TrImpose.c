@@ -56,7 +56,7 @@ int uiWatcher(SceSize argc, void* argv) {
 static tai_hook_ref_t app_start_ref;
 int hook_app_start(SceSize argc, const void *args) {
 
-	SceUID ui_watcher = sceKernelCreateThread("UI Overlayed Watcher", uiWatcher, 191, 1, 0, 0, NULL);
+	SceUID ui_watcher = sceKernelCreateThread("UI Overlayed Watcher", uiWatcher, 191, 0x1000, 0, 0, NULL);
 	sceKernelStartThread(ui_watcher, 0, NULL);
 
 	return TAI_CONTINUE(int, app_start_ref, argc, args);
